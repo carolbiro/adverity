@@ -14,7 +14,7 @@ const CsvReader: React.FC = () => {
                 console.log(parseCsv(text as string));
             }
     
-            // reader.readAsText(csvFile)
+            reader.readAsText(csvFile)
         }
     }
 
