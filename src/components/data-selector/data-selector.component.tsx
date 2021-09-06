@@ -20,7 +20,7 @@ const DataSelector: React.FC<DataSelectorProps> = (props:DataSelectorProps) => {
                 <select multiple onClick={onDatasourcesSelect}>
                 {
                     datasources.map(item => (
-                        <option key={item} className='option-field'> {item} </option>
+                        <option key={item+Math.random} className='option-field'> {item} </option>
                     ))
                 }
                 </select>
@@ -30,7 +30,7 @@ const DataSelector: React.FC<DataSelectorProps> = (props:DataSelectorProps) => {
                 <select multiple className="campaign" onClick={onCampaignSelect}>
                 {
                     campaigns.map(item => (
-                        <option key={item} className='option-field'> {item} </option>
+                        <option key={item+Math.random} className='option-field'> {item} </option>
                     ))
                 }
                 </select>
