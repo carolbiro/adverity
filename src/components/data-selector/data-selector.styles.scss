@@ -1,0 +1,22 @@
+.data-selector {
+    display: flex;
+
+    .selectors {
+        width: 35%;
+        align-items: center;
+        justify-content: center;
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campaign {
+            height: 200px;
+        }
+    }
+
+    .chart {
+        width: 65%;
+    }
+}
