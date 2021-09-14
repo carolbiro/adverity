@@ -14,7 +14,7 @@ export const processCSV = (str: string, delim=',') => {
 
     const newArray:CSVValue[] = rows.map( row => {
         const values = row.split(delim);
-        const eachObject = headers.reduce((obj: any, header, i) => {
+        const eachObject:CSVValue = headers.reduce((obj: any, header, i) => {
             obj[header] = values[i];
             return obj as CSVValue;
         }, {})
@@ -34,11 +34,7 @@ export const getUniqueData = (str: string, data: string, delim=',') => {
         return values[dataIndex]
     })
 
-    const onlyUnique = (value: string, index: number, self:any) => {
-        return self.indexOf(value) === index
-    }
-
-    return dataSourcesArray.filter(onlyUnique)
+    return _.uniq(dataSourcesArray)
 }
 
 export const getFilteredData = (csvArray: CSVValue[], datasources: string[], campaigns:string[]) => {

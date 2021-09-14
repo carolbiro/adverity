@@ -1,9 +1,9 @@
 import React from 'react'
 import CsvReader from './components/csv-reader/csv-reader.component'
 import DataSelector from './components/data-selector/data-selector.component'
-import Chart from "react-apexcharts"
+import ReactApexChart  from "react-apexcharts"
 import { getUniqueData, processCSV, CSVValue, getFilteredData } from './utils/csv-utils'
-import ChartConfig from './components/dimensions-chart/dimensions-chart.config'
+import ChartConfig from './chart.config'
 
 import './App.scss';
 
@@ -70,19 +70,27 @@ class App extends React.Component<IProps, IState> {
 
   updateCharts = () => {
     const state = this.state
-    if(this.state.csvArray.length > 0 ) {
+    if(state.csvArray.length > 0 ) {
       const filteredData = getFilteredData(state.csvArray, state.selectedDatasources, state.selectedCampaigns)
 
-      const options = ChartConfig.options
-      options.xaxis.categories = filteredData.flatMap(item => item.Date)
-
-      const series = ChartConfig.series
-      series[0].data = filteredData.flatMap(item => parseInt(item.Clicks))
-      series[1].data = filteredData.flatMap(item => parseInt(item.Impressions))
-      
       this.setState({
-        options: options,
-        series: series
+        options: {
+          ...this.state.options,
+          xaxis: {
+            ...this.state.options.xaxis,
+            categories: filteredData.flatMap(item => item.Date)
+          }
+        },
+        series: [
+          {
+            name: "Clicks",
+            data: filteredData.flatMap(item => parseInt(item.Clicks))
+          },
+          {
+              name: "Impressions",
+              data: filteredData.flatMap(item => parseInt(item.Impressions))
+          }
+        ]
       })
     }
   }
@@ -106,11 +114,11 @@ class App extends React.Component<IProps, IState> {
           onDatasourcesSelect={this.handleDatasourceSelect}
           onCampaignSelect={this.handleCampaignSelect}
         />
-        <p className="col">
-            <button onClick={this.updateCharts}>Update!</button>
-          </p>
+        <div>
+          <button onClick={() => { this.updateCharts()}}>Update Chart!</button>
+        </div>
         <div className="chart">
-          <Chart options={this.state.options} series={this.state.series} type="line" height={350} />
+          <ReactApexChart  options={this.state.options} series={this.state.series} type="line" height={350} />
         </div>
       </div>
     )

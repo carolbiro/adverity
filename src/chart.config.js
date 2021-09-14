@@ -4,7 +4,7 @@ const ChartConfig = {
           id: "basic-bar"
         },
         xaxis: {
-          categories: ['01.01.2019']
+          categories: []
         },
         yaxis: [
             {
@@ -53,11 +53,11 @@ const ChartConfig = {
     series : [
         {
           name: "Clicks",
-          data: [30]
+          data: []
         },
         {
             name: "Impressions",
-            data: [120]
+            data: []
         },
     ]
 }
