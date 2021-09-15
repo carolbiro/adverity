@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Using the application
+Before using install with `npm install` and start with `npm start` then:
+
+1. On the header of the application choose the provided csv file for upload and click the submit button.  This will prepopulate the Datasource and Campaign multiple select boxes.
+
+2. Choose one or more options by clicking or ctrl+click on `Datasource` and/or `Campaign` multiple select boxes and then click the `Update Chart!` button
+
+3. The graphic should be shown now.
+
 ## Available Scripts
 
 In the project directory, you can run:
