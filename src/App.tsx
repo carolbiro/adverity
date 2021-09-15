@@ -72,26 +72,30 @@ class App extends React.Component<IProps, IState> {
     const state = this.state
     if(state.csvArray.length > 0 ) {
       const filteredData = getFilteredData(state.csvArray, state.selectedDatasources, state.selectedCampaigns)
-
-      this.setState({
-        options: {
-          ...this.state.options,
-          xaxis: {
-            ...this.state.options.xaxis,
-            categories: filteredData.flatMap(item => item.Date)
-          }
-        },
-        series: [
-          {
-            name: "Clicks",
-            data: filteredData.flatMap(item => parseInt(item.Clicks))
+      if(filteredData.length < 1000){
+        this.setState({
+          options: {
+            ...this.state.options,
+            xaxis: {
+              ...this.state.options.xaxis,
+              categories: filteredData.flatMap(item => item.Date)
+            }
           },
-          {
-              name: "Impressions",
-              data: filteredData.flatMap(item => parseInt(item.Impressions))
-          }
-        ]
-      })
+          series: [
+            {
+              name: "Clicks",
+              data: filteredData.flatMap(item => parseInt(item.Clicks))
+            },
+            {
+                name: "Impressions",
+                data: filteredData.flatMap(item => parseInt(item.Impressions))
+            }
+          ]
+        })
+      }
+      else {
+        alert('Please refine your criteria. Too many results to draw(' + filteredData.length + ') on this chart!')
+      }
     }
   }
 
@@ -115,7 +119,7 @@ class App extends React.Component<IProps, IState> {
           onCampaignSelect={this.handleCampaignSelect}
         />
         <div>
-          <button onClick={() => { this.updateCharts()}}>Update Chart!</button>
+          <button onClick={this.updateCharts}>Update Chart!</button>
         </div>
         <div className="chart">
           <ReactApexChart  options={this.state.options} series={this.state.series} type="line" height={350} />
