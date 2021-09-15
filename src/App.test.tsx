@@ -33,7 +33,7 @@ test('Test we get a json array from csv', () => {
   })
 })
 
-test('Test data is filtered and expected data is not returned', () => {
+test('Test data is filtered and expected number of data is returned', () => {
   const filteredData = getFilteredData(processCSV(dataText), ['Google Adwords'], [] )
   expect(filteredData.length).toBe(8)
 })
